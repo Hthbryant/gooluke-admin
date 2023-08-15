@@ -29,6 +29,11 @@ public class BaseResponseDTO<T> {
         this.msg = errorStatus.getErrMsg();
     }
 
+    public BaseResponseDTO(String code,String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     public String getCode() {
         return code;
     }
