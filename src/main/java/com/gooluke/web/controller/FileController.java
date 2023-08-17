@@ -19,6 +19,8 @@ public class FileController {
 
     @RequestMapping("/get")
     public BaseResponseDTO<FileData> getFile(@RequestHeader(value = "token") String token, String name) {
+        System.out.println("token = " + token);
+        System.out.println("name = " + name);
         return new BaseResponseDTO<>(new FileData("id-" + name, name));
     }
 

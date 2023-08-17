@@ -23,6 +23,14 @@ public class GlobalExceptionHandler {
 
     private final static Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+
+    //全局异常处理
+    @ExceptionHandler(Exception.class)
+    public BaseResponseDTO<Object> handleException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Exception e) {
+        log.warn(String.format("请求[%s]异常: [%s]", httpServletRequest.getRequestURI(), e.getMessage()));
+        return new BaseResponseDTO<>(ErrorStatus.SYSTEM_ERROR);
+    }
+
     //捕获必传header导致的异常
     @ExceptionHandler(MissingRequestHeaderException.class)
     public BaseResponseDTO<Object> handleMissingRequestHeaderException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, MissingRequestHeaderException e) {
