@@ -25,12 +25,11 @@ public class GlobalExceptionHandler {
 
     //捕获必传header导致的异常
     @ExceptionHandler(MissingRequestHeaderException.class)
-    public BaseResponseDTO<Object> handleMissingRequestHeaderException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,MissingRequestHeaderException e) {
-        String errMsg = String.format("请求 %s 缺少请求头 [%s]", httpServletRequest.getRequestURI(),e.getHeaderName());
+    public BaseResponseDTO<Object> handleMissingRequestHeaderException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, MissingRequestHeaderException e) {
+        String errMsg = String.format("请求 %s 缺少请求头 [%s]", httpServletRequest.getRequestURI(), e.getHeaderName());
         log.warn(errMsg);
-        log.warn("请求 " + httpServletRequest.getRequestURI() + "缺少请求头[{}]",e.getHeaderName());
         httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        return new BaseResponseDTO<>(ErrorStatus.WRONG_PARAM.getErrCode(),errMsg);
+        return new BaseResponseDTO<>(ErrorStatus.WRONG_PARAM.getErrCode(), errMsg);
     }
 
 }
