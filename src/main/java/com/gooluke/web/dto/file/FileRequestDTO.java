@@ -1,6 +1,6 @@
-package com.gooluke.common.dto.file;
+package com.gooluke.web.dto.file;
 
-import com.gooluke.common.dto.BaseRequestDTO;
+import com.gooluke.web.dto.BaseRequestDTO;
 
 /**
  * @author 咕噜科

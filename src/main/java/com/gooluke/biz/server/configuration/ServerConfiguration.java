@@ -1,6 +1,6 @@
 package com.gooluke.biz.server.configuration;
 
-import com.gooluke.biz.interceptor.AuthInterceptor;
+import com.gooluke.biz.server.interceptor.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

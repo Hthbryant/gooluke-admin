@@ -1,6 +1,6 @@
 package com.gooluke.common.exception;
 
-import com.gooluke.common.dto.BaseResponseDTO;
+import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.common.enums.ErrorStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,18 +26,18 @@ public class GlobalExceptionHandler {
 
     //全局异常处理
     @ExceptionHandler(Exception.class)
-    public BaseResponseDTO<Object> handleException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Exception e) {
+    public BaseResponseDTO handleException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Exception e) {
         log.warn(String.format("请求[%s]异常: [%s]", httpServletRequest.getRequestURI(), e.getMessage()));
-        return new BaseResponseDTO<>(ErrorStatus.SYSTEM_ERROR);
+        return new BaseResponseDTO(ErrorStatus.SYSTEM_ERROR);
     }
 
     //捕获必传header导致的异常
     @ExceptionHandler(MissingRequestHeaderException.class)
-    public BaseResponseDTO<Object> handleMissingRequestHeaderException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, MissingRequestHeaderException e) {
+    public BaseResponseDTO handleMissingRequestHeaderException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, MissingRequestHeaderException e) {
         String errMsg = String.format("请求 %s 缺少请求头 [%s]", httpServletRequest.getRequestURI(), e.getHeaderName());
         log.warn(errMsg);
         httpServletResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-        return new BaseResponseDTO<>(ErrorStatus.WRONG_PARAM.getErrCode(), errMsg);
+        return new BaseResponseDTO(ErrorStatus.WRONG_PARAM.getErrCode(), errMsg);
     }
 
 }

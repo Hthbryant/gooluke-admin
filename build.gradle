@@ -24,7 +24,8 @@ List common = [
         'org.projectlombok:lombok:1.18.22',
         'com.google.guava:guava:20.0',
         'com.alibaba:fastjson:1.2.75',
-        'org.apache.httpcomponents:httpclient:4.5.13'
+        'org.apache.httpcomponents:httpclient:4.5.13',
+        'org.apache.commons:commons-lang3:3.12.0'
 ]
 
 //自定义声明变量 def xxxx = "2.1.1"
@@ -39,6 +40,8 @@ List spring = [
 
 dependencies {
     implementation(common,spring)
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'

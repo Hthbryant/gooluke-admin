@@ -1,4 +1,4 @@
-package com.gooluke.common.dto;
+package com.gooluke.web.dto;
 
 import com.gooluke.common.enums.ErrorStatus;
 
@@ -9,19 +9,21 @@ import com.gooluke.common.enums.ErrorStatus;
  * Description:
  * version 1.0
  */
-public class BaseResponseDTO<T> {
+public class BaseResponseDTO {
 
     private String code = "0";
     private String msg = "success";
-    private T data;
+    private String bizSeqNo;
+    private Object data;
+
 
     public BaseResponseDTO() {
     }
 
-    public BaseResponseDTO(T t) {
+    public BaseResponseDTO(Object object) {
         this.code = "0";
         this.msg = "success";
-        this.data = t;
+        this.data = object;
     }
 
     public BaseResponseDTO(ErrorStatus errorStatus) {
@@ -50,11 +52,19 @@ public class BaseResponseDTO<T> {
         this.msg = msg;
     }
 
-    public T getData() {
+    public String getBizSeqNo() {
+        return bizSeqNo;
+    }
+
+    public void setBizSeqNo(String bizSeqNo) {
+        this.bizSeqNo = bizSeqNo;
+    }
+
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 }

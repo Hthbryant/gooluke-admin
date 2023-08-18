@@ -1,6 +1,6 @@
 package com.gooluke.web.controller;
 
-import com.gooluke.common.dto.BaseResponseDTO;
+import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.common.entity.FileData;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileController {
 
     @RequestMapping("/get")
-    public BaseResponseDTO<FileData> getFile(@RequestHeader(value = "token") String token, String name) {
-        System.out.println("token = " + token);
-        System.out.println("name = " + name);
-        return new BaseResponseDTO<>(new FileData("id-" + name, name));
+    public BaseResponseDTO getFile(@RequestHeader(value = "token") String token, String name) {
+        return new BaseResponseDTO(new FileData("id-" + name, name));
     }
 
 }
