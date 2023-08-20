@@ -11,7 +11,8 @@ public enum ErrorStatus {
 
     SUCCESS("0","success"),
     SYSTEM_ERROR("17020001","系统异常"),
-    WRONG_PARAM("17020002","参数错误"),
+    TIMEOUT_EXCEPTION("17020002","系统超时"),
+    WRONG_PARAM("17020003","参数错误"),
     ;
 
     private String errCode;

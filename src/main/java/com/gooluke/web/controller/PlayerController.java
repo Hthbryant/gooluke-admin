@@ -1,6 +1,7 @@
 package com.gooluke.web.controller;
 
 import com.gooluke.biz.service.PlayerService;
+import com.gooluke.common.enums.ErrorStatus;
 import com.gooluke.web.dto.player.PlayerRequestDTO;
 import com.gooluke.web.dto.player.PlayerResponseDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/player")
 @Slf4j
-public class PlayerController extends BaseController{
+public class PlayerController extends BaseController {
 
     @Autowired
     private PlayerService playerService;
@@ -31,12 +32,16 @@ public class PlayerController extends BaseController{
     @RequestMapping("/list")
     public PlayerResponseDTO getPlayerList(HttpServletRequest httpServletRequest,
                                            HttpServletResponse httpServletResponse,
-                                           @RequestBody PlayerRequestDTO requestDTO){
-        log.info("getPlayerList requestDTO:{}",JSON_MAPPER.toJson(requestDTO));
-        return doExecute(httpServletRequest,httpServletResponse,timeout,requestDTO,(request -> {
+                                           @RequestBody PlayerRequestDTO requestDTO) {
+
+        log.info("getPlayerList requestDTO:{}", JSON_MAPPER.toJson(requestDTO));
+        PlayerResponseDTO timeoutResponse = new PlayerResponseDTO(ErrorStatus.TIMEOUT_EXCEPTION);
+        PlayerResponseDTO errorResponse = new PlayerResponseDTO(ErrorStatus.SYSTEM_ERROR);
+
+        return doExecute(httpServletRequest, httpServletResponse, timeout, requestDTO, (request -> {
             PlayerResponseDTO responseDTO = playerService.getPlayerList(request);
-            log.info("getPlayerList responseDTO:{}",JSON_MAPPER.toJson(responseDTO));
+            log.info("getPlayerList responseDTO:{}", JSON_MAPPER.toJson(responseDTO));
             return responseDTO;
-        }));
+        }), timeoutResponse, errorResponse);
     }
 }

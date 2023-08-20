@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -31,6 +32,23 @@ public class ServerConfiguration implements WebMvcConfigurer {
 
     @Autowired
     private AuthInterceptor authInterceptor;
+
+    @Bean("threadPoolTaskExecutor")
+    public ThreadPoolTaskExecutor threadPoolExecutor(@Value("${threadPool.corePoolSize}") int corePoolSize,
+                                       @Value("${threadPool.maxPoolSize}") int maxPoolSize,
+                                       @Value("${threadPool.keepAliveSeconds}") int keepAliveSeconds,
+                                       @Value("${threadPool.queueCapacity}") int queueCapacity,
+                                       @Value("${threadPool.threadNamePrefix}") String threadNamePrefix
+                                                 ) {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(corePoolSize);
+        executor.setMaxPoolSize(maxPoolSize);
+        executor.setKeepAliveSeconds(keepAliveSeconds);
+        executor.setQueueCapacity(queueCapacity);
+        executor.setThreadNamePrefix(threadNamePrefix);
+        executor.initialize();
+        return executor;
+    }
 
     @Bean("sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) {
