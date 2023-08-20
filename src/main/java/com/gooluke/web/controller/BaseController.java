@@ -39,20 +39,21 @@ public class BaseController {
             , HttpServletResponse httpServletResponse, long timeout, E request, TemplateInterface<T, E> templateInterface, T timoutResponse, T exceptionResponse) {
         //TODO 执行逻辑
         setBizSeq(request);
-        Future<BaseResponseDTO> future = getResult(templateInterface, request);
+        Future<T> future = getResult(templateInterface, request);
         try {
-            future.get(timeout, TimeUnit.MILLISECONDS);
+            T baseResponseDTO = future.get(timeout, TimeUnit.MILLISECONDS);
+            baseResponseDTO.setBizSeqNo(request.getBizSeqNo());
+            return baseResponseDTO;
         } catch (TimeoutException e) {
+            timoutResponse.setBizSeqNo(request.getBizSeqNo());
             return timoutResponse;
         } catch (Exception e) {
+            exceptionResponse.setBizSeqNo(request.getBizSeqNo());
             return exceptionResponse;
         }
-        T resp = templateInterface.apply(request);
-        resp.setBizSeqNo(request.getBizSeqNo());
-        return resp;
     }
 
-    public <T extends BaseResponseDTO, E extends BaseRequestDTO> Future<BaseResponseDTO> getResult(TemplateInterface<T, E> templateInterface, E request) {
+    public <T extends BaseResponseDTO, E extends BaseRequestDTO> Future<T> getResult(TemplateInterface<T, E> templateInterface, E request) {
         return threadPoolTaskExecutor.submit(() -> {
             return templateInterface.apply(request);
         });

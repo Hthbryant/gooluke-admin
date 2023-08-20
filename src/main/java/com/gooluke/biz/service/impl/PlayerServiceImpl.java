@@ -26,7 +26,6 @@ public class PlayerServiceImpl implements PlayerService {
     private PlayerDAO playerDAO;
     @Override
     public PlayerResponseDTO getPlayerList(PlayerRequestDTO requestDTO) {
-        int a = 1/0;
         TPlayer player = new TPlayer();
         BeanUtils.copyProperties(requestDTO,player);
         PageInfo page = requestDTO.getPage() == null ? new PageInfo() : requestDTO.getPage();
