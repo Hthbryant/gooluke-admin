@@ -2,6 +2,7 @@ package com.gooluke.web.controller;
 
 import com.gooluke.biz.service.LoginService;
 import com.gooluke.common.enums.ErrorStatus;
+import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.web.dto.login.LoginRequestDTO;
 import com.gooluke.web.dto.login.LoginResponseDTO;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class LoginController extends BaseController{
         LoginRequestDTO requestDTO = new LoginRequestDTO();
         requestDTO.setUserId(userId);
         requestDTO.setPassword(password);
-        log.info("getPlayerList requestDTO:{}", JSON_MAPPER.toJson(requestDTO));
+        log.info("login requestDTO:{}", JSON_MAPPER.toJson(requestDTO));
         LoginResponseDTO timeoutResponse = new LoginResponseDTO(ErrorStatus.TIMEOUT_EXCEPTION);
         LoginResponseDTO errorResponse = new LoginResponseDTO(ErrorStatus.SYSTEM_ERROR);
         return doExecute(httpServletRequest,httpServletResponse,timeout,requestDTO,(request->{
@@ -44,8 +45,18 @@ public class LoginController extends BaseController{
     }
 
     @RequestMapping("/logout")
-    public String logout(){
-        return "logout success";
+    public BaseResponseDTO logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+                                  @RequestHeader String userId) {
+        LoginRequestDTO requestDTO = new LoginRequestDTO();
+        requestDTO.setUserId(userId);
+        log.info("logout requestDTO:{}", JSON_MAPPER.toJson(requestDTO));
+        LoginResponseDTO timeoutResponse = new LoginResponseDTO(ErrorStatus.TIMEOUT_EXCEPTION);
+        LoginResponseDTO errorResponse = new LoginResponseDTO(ErrorStatus.SYSTEM_ERROR);
+        return doExecute(httpServletRequest, httpServletResponse, timeout, requestDTO, (request -> {
+            BaseResponseDTO responseDTO = loginService.logout(request);
+            log.info("logout responseDTO:{}", JSON_MAPPER.toJson(responseDTO));
+            return responseDTO;
+        }), timeoutResponse, errorResponse);
     }
 
 }

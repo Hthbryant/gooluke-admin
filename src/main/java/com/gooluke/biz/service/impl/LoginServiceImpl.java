@@ -62,6 +62,11 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public BaseResponseDTO logout(LoginRequestDTO requestDTO) {
-        return null;
+        TUserToken tUserToken = userTokenDAO.selectByUserId(requestDTO.getUserId());
+        if (tUserToken != null) {
+            TUserToken update = new TUserToken().setUserId(requestDTO.getUserId()).setStatus(UserTokenStatusEnum.EXPIRED.getStatus());
+            userTokenDAO.updateTokenStatus(update);
+        }
+        return new BaseResponseDTO();
     }
 }

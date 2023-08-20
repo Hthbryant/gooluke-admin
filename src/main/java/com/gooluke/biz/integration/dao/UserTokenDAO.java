@@ -21,4 +21,6 @@ public interface UserTokenDAO {
     int insert(TUserToken userToken);
 
     int updateToken(TUserToken userToken);
+
+    int updateTokenStatus(TUserToken userToken);
 }

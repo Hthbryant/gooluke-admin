@@ -10,8 +10,8 @@ package com.gooluke.common.enums;
 public enum UserTokenStatusEnum {
 
     NORMAL("normal","正常"),
-    LOCKED("locked","锁定"),
-    DELETED("deleted","删除");
+    EXPIRED("expired","已过期")
+    ;
 
     UserTokenStatusEnum(String status,String desc){
         this.status = status;
