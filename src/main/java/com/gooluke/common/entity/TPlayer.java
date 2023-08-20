@@ -1,5 +1,6 @@
 package com.gooluke.common.entity;
 
+import com.gooluke.web.dto.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,6 @@ public class TPlayer implements Serializable {
     private String name;
     private String phone;
     private String address;
+
+    private PageInfo page;
 }

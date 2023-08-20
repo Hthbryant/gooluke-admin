@@ -1,12 +1,16 @@
 package com.gooluke.biz.service.impl;
 
+import com.gooluke.biz.integration.dao.PlayerDAO;
 import com.gooluke.biz.service.PlayerService;
 import com.gooluke.common.entity.TPlayer;
+import com.gooluke.web.dto.PageInfo;
 import com.gooluke.web.dto.player.PlayerRequestDTO;
 import com.gooluke.web.dto.player.PlayerResponseDTO;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 咕噜科
@@ -18,13 +22,15 @@ import java.util.ArrayList;
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
+    @Autowired
+    private PlayerDAO playerDAO;
     @Override
     public PlayerResponseDTO getPlayerList(PlayerRequestDTO requestDTO) {
-        TPlayer tPlayer1 = new TPlayer().setName("kobe").setAddress("美国洛杉矶");
-        TPlayer tPlayer2 = new TPlayer().setName("wade").setAddress("美国迈阿密");
-        ArrayList<TPlayer> list = new ArrayList<>();
-        list.add(tPlayer1);
-        list.add(tPlayer2);
+        TPlayer player = new TPlayer();
+        BeanUtils.copyProperties(requestDTO,player);
+        PageInfo page = requestDTO.getPage() == null ? new PageInfo() : requestDTO.getPage();
+        player.setPage(page);
+        List<TPlayer> list = playerDAO.selectPlayerList(player);
         PlayerResponseDTO responseDTO = new PlayerResponseDTO();
         responseDTO.setPlayerList(list);
         return responseDTO;

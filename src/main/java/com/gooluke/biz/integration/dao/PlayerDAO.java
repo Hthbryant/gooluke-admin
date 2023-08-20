@@ -1,0 +1,21 @@
+package com.gooluke.biz.integration.dao;
+
+import com.gooluke.common.entity.TPlayer;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * @author 咕噜科
+ * ClassName: PlayerDAO
+ * date: 2023-08-20 17:14
+ * Description:
+ * version 1.0
+ */
+@Mapper
+public interface PlayerDAO {
+
+    TPlayer selectById(@Param("id") Integer id);
+    List<TPlayer> selectPlayerList(TPlayer player);
+}
