@@ -1,6 +1,6 @@
 package com.gooluke.biz.integration.dao;
 
-import com.gooluke.common.entity.TPlayer;
+import com.gooluke.biz.entity.TPlayer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

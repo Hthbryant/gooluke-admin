@@ -1,6 +1,6 @@
 package com.gooluke.web.dto.player;
 
-import com.gooluke.common.entity.TPlayer;
+import com.gooluke.biz.entity.TPlayer;
 import com.gooluke.common.enums.ErrorStatus;
 import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.web.dto.PageInfo;

@@ -9,10 +9,14 @@ package com.gooluke.common.enums;
  */
 public enum ErrorStatus {
 
+    //系统错误码
     SUCCESS("0","success"),
     SYSTEM_ERROR("17020001","系统异常"),
     TIMEOUT_EXCEPTION("17020002","系统超时"),
     WRONG_PARAM("17020003","参数错误"),
+
+    //用户错误码
+    LOGIN_WRONG("17021001","用户不存在或密码错误"),
     ;
 
     private String errCode;

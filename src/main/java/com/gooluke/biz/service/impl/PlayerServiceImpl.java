@@ -2,7 +2,7 @@ package com.gooluke.biz.service.impl;
 
 import com.gooluke.biz.integration.dao.PlayerDAO;
 import com.gooluke.biz.service.PlayerService;
-import com.gooluke.common.entity.TPlayer;
+import com.gooluke.biz.entity.TPlayer;
 import com.gooluke.web.dto.PageInfo;
 import com.gooluke.web.dto.player.PlayerRequestDTO;
 import com.gooluke.web.dto.player.PlayerResponseDTO;

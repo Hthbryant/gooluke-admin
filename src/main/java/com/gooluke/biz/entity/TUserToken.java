@@ -1,6 +1,5 @@
-package com.gooluke.common.entity;
+package com.gooluke.biz.entity;
 
-import com.gooluke.web.dto.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +9,8 @@ import java.io.Serializable;
 
 /**
  * @author 咕噜科
- * ClassName: TPlayer
- * date: 2023-08-18 20:54
+ * ClassName: TUserToken
+ * date: 2023-08-21 0:46
  * Description:
  * version 1.0
  */
@@ -19,12 +18,14 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class TPlayer implements Serializable {
+public class TUserToken implements Serializable {
 
     private Integer id;
-    private String name;
-    private String phone;
-    private String address;
+    private String userId;
+    private String token;
+    private String status;
+    private String expireTime;
+    private String createTime;
+    private String updateTime;
 
-    private PageInfo page;
 }
