@@ -40,11 +40,16 @@ List spring = [
 
 dependencies {
     implementation(common,spring)
-    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
-    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+    //整合log4j2
+    implementation 'org.springframework.boot:spring-boot-starter-log4j2:2.5.4'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+configurations.all {
+    //去除springboot的默认依赖logging
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
 }
 
 bootRun{

@@ -35,7 +35,7 @@ public class PlayerController extends BaseController{
         log.info("getPlayerList requestDTO:{}",JSON_MAPPER.toJson(requestDTO));
         return doExecute(httpServletRequest,httpServletResponse,timeout,requestDTO,(request -> {
             PlayerResponseDTO responseDTO = playerService.getPlayerList(request);
-            log.info("getPlayerList responseDTO:{}",responseDTO);
+            log.info("getPlayerList responseDTO:{}",JSON_MAPPER.toJson(responseDTO));
             return responseDTO;
         }));
     }

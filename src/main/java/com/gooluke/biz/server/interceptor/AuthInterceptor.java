@@ -43,7 +43,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        log.info("postHandle request: {}", request.getRequestURI());
+        //log.info("postHandle request: {}", request.getRequestURI());
     }
 
 }
