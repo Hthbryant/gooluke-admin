@@ -5,6 +5,8 @@ import com.gooluke.common.tool.JsonMapper;
 import com.gooluke.common.utils.BizSeqUtil;
 import com.gooluke.web.dto.BaseRequestDTO;
 import com.gooluke.web.dto.BaseResponseDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -24,6 +26,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class BaseController {
 
+    private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
     protected static final JsonMapper JSON_MAPPER = JsonMapper.nonEmptyMapper();
 
     @Autowired
@@ -47,9 +50,11 @@ public class BaseController {
             baseResponseDTO.setBizSeqNo(request.getBizSeqNo());
             return baseResponseDTO;
         } catch (TimeoutException e) {
+            logger.error("{}|submit request timeout exception:{}",request.getBizSeqNo(),e.getMessage());
             timoutResponse.setBizSeqNo(request.getBizSeqNo());
             return timoutResponse;
         } catch (Exception e) {
+            logger.error("{}|submit request error:",request.getBizSeqNo(),e);
             exceptionResponse.setBizSeqNo(request.getBizSeqNo());
             return exceptionResponse;
         }

@@ -13,7 +13,7 @@ import java.util.List;
  * Description:
  * version 1.0
  */
-@Mapper
+@Mapper//这里不加也行，不影响注入，加了自动注入就不会报红
 public interface PlayerDAO {
 
     TPlayer selectById(@Param("id") Integer id);

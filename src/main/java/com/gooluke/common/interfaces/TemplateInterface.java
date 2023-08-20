@@ -9,7 +9,5 @@ package com.gooluke.common.interfaces;
  */
 @FunctionalInterface
 public interface TemplateInterface<T , E> {
-
     T apply(E r);
-
 }
