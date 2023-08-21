@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
         TUserToken oldUserToken = userTokenDAO.selectByUserId(requestDTO.getUserId());
         TUserToken newUserToken = new TUserToken().setUserId(requestDTO.getUserId()).setToken(token).setExpireTime(expireTime).setStatus(UserTokenStatusEnum.NORMAL.getStatus());
 
-        int result = oldUserToken != null ? userTokenDAO.updateToken(newUserToken) : userTokenDAO.insert(newUserToken);
+        int result = oldUserToken != null ? userTokenDAO.update(newUserToken) : userTokenDAO.insert(newUserToken);
         if (result == 0) {
             log.warn("生成或更新token失败");
             return new BaseResponseDTO(ErrorStatus.SYSTEM_ERROR);
@@ -65,7 +65,7 @@ public class LoginServiceImpl implements LoginService {
         TUserToken tUserToken = userTokenDAO.selectByUserId(requestDTO.getUserId());
         if (tUserToken != null) {
             TUserToken update = new TUserToken().setUserId(requestDTO.getUserId()).setStatus(UserTokenStatusEnum.EXPIRED.getStatus());
-            userTokenDAO.updateTokenStatus(update);
+            userTokenDAO.update(update);
         }
         return new BaseResponseDTO();
     }

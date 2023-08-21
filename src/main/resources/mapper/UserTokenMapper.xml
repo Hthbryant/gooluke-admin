@@ -26,11 +26,14 @@
         values (#{userId}, #{token}, #{status}, #{expireTime});
     </insert>
 
-    <update id="updateToken" parameterType="com.gooluke.biz.entity.TUserToken">
-        update t_user_token set token = #{token},status = #{status},expire_time = #{expireTime} where user_id = #{userId};
-    </update>
 
-    <update id="updateTokenStatus" parameterType="com.gooluke.biz.entity.TUserToken">
-        update t_user_token set status = #{status} where user_id = #{userId};
+    <update id="update" parameterType="com.gooluke.biz.entity.TUserToken">
+        update t_user_token
+        <set>
+            <if test="token != null and token !=''">token = #{token},</if>
+            <if test="status != null and token !=''">status = #{status},</if>
+            <if test="expireTime != null and expireTime !=''">expire_time = #{expireTime},</if>
+        </set>
+        where user_id = #{userId};
     </update>
 </mapper>

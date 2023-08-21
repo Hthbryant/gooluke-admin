@@ -1,11 +1,12 @@
 package com.gooluke.biz.config.interceptor;
 
+import com.gooluke.biz.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,21 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 @Slf4j
 public class AuthInterceptor implements HandlerInterceptor {
 
+    @Autowired
+    private AuthService authService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.info("preHandle request: {}", request.getRequestURI());
-        Cookie[] cookies = request.getCookies();
-        if (request.getCookies() == null) {
-            return false;
-        }
-
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")) {
-                String token = cookie.getValue();
-                if (token.startsWith("bryant")) {
-                    return true;
-                }
-            }
+        if (authService.checkToken(request)) {
+            return true;
         }
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.getWriter().write("Unauthorized");
