@@ -37,11 +37,13 @@ public class AuthServiceImpl implements AuthService {
     public boolean checkToken(HttpServletRequest request) {
         String token = getTokenFromCookie(request);
         if (StringUtils.isEmpty(token)) {
+            logger.warn("token can not be null");
             return false;
         }
 
         String userId = getUserIdFromCookie(request);
         if (StringUtils.isEmpty(userId)) {
+            logger.warn("userId can not be null");
             return false;
         }
 

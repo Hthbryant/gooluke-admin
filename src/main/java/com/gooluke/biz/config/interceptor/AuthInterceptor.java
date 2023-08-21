@@ -1,6 +1,9 @@
 package com.gooluke.biz.config.interceptor;
 
 import com.gooluke.biz.service.AuthService;
+import com.gooluke.common.enums.ErrorStatus;
+import com.gooluke.common.tool.JsonMapper;
+import com.gooluke.web.dto.BaseResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,7 +34,8 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
         }
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().write("Unauthorized");
+        response.setCharacterEncoding("utf-8");
+        response.getWriter().write(JsonMapper.nonEmptyMapper().toJson(new BaseResponseDTO(ErrorStatus.UNAUTHORIZED_ERROR)));
         return false;
     }
 
