@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @Slf4j
-public class LoginController extends BaseController{
+public class LoginController extends GoolukeBaseController{
 
     @Autowired
     private LoginService loginService;

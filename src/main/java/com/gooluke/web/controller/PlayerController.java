@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/player")
 @Slf4j
-public class PlayerController extends BaseController {
+public class PlayerController extends GoolukeBaseController {
 
     @Autowired
     private PlayerService playerService;
