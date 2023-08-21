@@ -1,7 +1,6 @@
 package com.gooluke.web.dto.user;
 
 import com.gooluke.web.dto.BaseRequestDTO;
-import com.gooluke.web.dto.PageInfo;
 import lombok.Data;
 
 /**
@@ -22,5 +21,4 @@ public class UserRequestDTO extends BaseRequestDTO {
     private String address;
     private String phone;
 
-    private PageInfo page;
 }

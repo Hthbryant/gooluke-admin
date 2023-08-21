@@ -11,11 +11,21 @@ public class BaseRequestDTO {
 
     private String bizSeqNo;
 
+    private PageInfo page;
+
     public String getBizSeqNo() {
         return bizSeqNo;
     }
 
     public void setBizSeqNo(String bizSeqNo) {
         this.bizSeqNo = bizSeqNo;
+    }
+
+    public PageInfo getPage() {
+        return page;
+    }
+
+    public void setPage(PageInfo page) {
+        this.page = page;
     }
 }
