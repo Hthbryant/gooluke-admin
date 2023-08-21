@@ -6,9 +6,16 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH-mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
         </Console>
         <!-- 文件输出 -->
-        <File name="File" fileName="E:/work/log_file/gooluke-admin/gooluke-admin.log">
+        <RollingFile name="File" fileName="E:/work/log_file/gooluke-admin/gooluke-admin.log"
+                     filePattern="E:/work/log_file/gooluke-admin/gooluke-admin_%d{yyyy-MM-dd}_%i.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
-        </File>
+            <Policies>
+                <!--按照文件大小拆分 -->
+                <SizeBasedTriggeringPolicy size="200MB" />
+                <!--按照时间节点进行拆分-->
+                <TimeBasedTriggeringPolicy interval="1h" />
+            </Policies>
+        </RollingFile>
     </Appenders>
     <Loggers>
         <Root level="info">
