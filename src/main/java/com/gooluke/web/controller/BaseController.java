@@ -1,6 +1,6 @@
 package com.gooluke.web.controller;
 
-import com.gooluke.common.interfaces.TemplateInterface;
+import com.gooluke.biz.config.interfaces.TemplateInterface;
 import com.gooluke.common.utils.BizSeqUtil;
 import com.gooluke.web.dto.BaseRequestDTO;
 import com.gooluke.web.dto.BaseResponseDTO;

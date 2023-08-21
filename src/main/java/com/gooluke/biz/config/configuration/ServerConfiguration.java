@@ -1,7 +1,7 @@
-package com.gooluke.biz.server.configuration;
+package com.gooluke.biz.config.configuration;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.gooluke.biz.server.interceptor.AuthInterceptor;
+import com.gooluke.biz.config.interceptor.AuthInterceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.slf4j.Logger;

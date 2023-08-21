@@ -1,4 +1,4 @@
-package com.gooluke.common.interfaces;
+package com.gooluke.biz.config.interfaces;
 
 /**
  * @author 咕噜科

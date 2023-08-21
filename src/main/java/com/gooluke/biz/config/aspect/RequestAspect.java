@@ -1,4 +1,4 @@
-package com.gooluke.biz.server.aspect;
+package com.gooluke.biz.config.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;

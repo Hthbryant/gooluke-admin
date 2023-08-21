@@ -1,4 +1,4 @@
-package com.gooluke.biz.server.interceptor;
+package com.gooluke.biz.config.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

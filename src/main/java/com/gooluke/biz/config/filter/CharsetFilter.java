@@ -1,4 +1,4 @@
-package com.gooluke.biz.server.filter;
+package com.gooluke.biz.config.filter;
 
 import javax.servlet.*;
 import java.io.IOException;

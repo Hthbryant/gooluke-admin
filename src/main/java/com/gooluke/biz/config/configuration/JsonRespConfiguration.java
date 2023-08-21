@@ -1,4 +1,4 @@
-package com.gooluke.biz.server.configuration;
+package com.gooluke.biz.config.configuration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;

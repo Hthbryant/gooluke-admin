@@ -10,6 +10,7 @@ package com.gooluke.web.dto;
 public class BaseRequestDTO {
 
     private String bizSeqNo;
+    private String opUserId;
 
     private PageInfo page;
 
