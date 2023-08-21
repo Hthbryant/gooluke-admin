@@ -36,6 +36,6 @@ public class GoolukeBaseController extends AbstractBaseController{
     @Override
     protected void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BaseResponseDTO response, Method method) {
         //统一响应日志打印
-        logger.info("{}.{} request:{}",method.getDeclaringClass().getSimpleName(),method.getName(),JSON_MAPPER.toJson(response));
+        logger.info("{}.{} response:{}",method.getDeclaringClass().getSimpleName(),method.getName(),JSON_MAPPER.toJson(response));
     }
 }
