@@ -27,7 +27,7 @@
     </insert>
 
     <update id="updateToken" parameterType="com.gooluke.biz.entity.TUserToken">
-        update t_user_token set token = #{token},expire_time = #{expireTime} where user_id = #{userId};
+        update t_user_token set token = #{token},status = #{status},expire_time = #{expireTime} where user_id = #{userId};
     </update>
 
     <update id="updateTokenStatus" parameterType="com.gooluke.biz.entity.TUserToken">

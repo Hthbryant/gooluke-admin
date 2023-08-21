@@ -14,6 +14,8 @@ public class BaseResponseDTO {
     private String code = "0";
     private String msg = "success";
     private String bizSeqNo;
+
+    private PageInfo page;
     private Object data;
 
 
@@ -23,7 +25,22 @@ public class BaseResponseDTO {
     public BaseResponseDTO(Object object) {
         this.code = "0";
         this.msg = "success";
+        if (object instanceof BaseResponseDTO) {
+            ((BaseResponseDTO) object).setCode(null);
+            ((BaseResponseDTO) object).setMsg(null);
+        }
         this.data = object;
+    }
+
+    public static BaseResponseDTO page(PageInfo page,Object object) {
+        BaseResponseDTO baseResponseDTO = new BaseResponseDTO();
+        if (object instanceof BaseResponseDTO) {
+            ((BaseResponseDTO) object).setCode(null);
+            ((BaseResponseDTO) object).setMsg(null);
+        }
+        baseResponseDTO.setPage(page);
+        baseResponseDTO.setData(object);
+        return baseResponseDTO;
     }
 
     public BaseResponseDTO(ErrorStatus errorStatus) {
@@ -66,5 +83,13 @@ public class BaseResponseDTO {
 
     public void setData(Object data) {
         this.data = data;
+    }
+
+    public PageInfo getPage() {
+        return page;
+    }
+
+    public void setPage(PageInfo page) {
+        this.page = page;
     }
 }

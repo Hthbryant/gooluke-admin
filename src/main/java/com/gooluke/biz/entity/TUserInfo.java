@@ -1,5 +1,6 @@
 package com.gooluke.biz.entity;
 
+import com.gooluke.web.dto.PageInfo;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,5 +23,7 @@ public class TUserInfo implements Serializable {
     private String address;
     private String createTime;
     private String updateTime;
+
+    private PageInfo page;
 
 }

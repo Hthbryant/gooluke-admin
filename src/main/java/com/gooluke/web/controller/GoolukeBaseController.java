@@ -1,5 +1,6 @@
 package com.gooluke.web.controller;
 
+import com.gooluke.common.enums.ErrorStatus;
 import com.gooluke.common.tool.JsonMapper;
 import com.gooluke.web.dto.BaseRequestDTO;
 import com.gooluke.web.dto.BaseResponseDTO;
@@ -22,6 +23,9 @@ public class GoolukeBaseController extends AbstractBaseController{
     protected static final Logger logger = LoggerFactory.getLogger(GoolukeBaseController.class);
     protected static final JsonMapper JSON_MAPPER = JsonMapper.nonEmptyMapper();
 
+    protected static final BaseResponseDTO timeoutResponse = new BaseResponseDTO(ErrorStatus.TIMEOUT_EXCEPTION);
+    protected static final BaseResponseDTO exceptionResponse = new BaseResponseDTO(ErrorStatus.SYSTEM_ERROR);
+
     protected static long timeout = 7000;
     @Override
     protected void preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BaseRequestDTO request, Method method) {
@@ -30,7 +34,8 @@ public class GoolukeBaseController extends AbstractBaseController{
     }
 
     @Override
-    protected void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BaseResponseDTO response) {
-        logger.info("postHandle...");
+    protected void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BaseResponseDTO response, Method method) {
+        //统一响应日志打印
+        logger.info("{}.{} request:{}",method.getDeclaringClass().getSimpleName(),method.getName(),JSON_MAPPER.toJson(response));
     }
 }

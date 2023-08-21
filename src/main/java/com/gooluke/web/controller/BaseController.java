@@ -62,7 +62,7 @@ public class BaseController {
             });
             T baseResponseDTO = future.get(timeout, TimeUnit.MILLISECONDS);
             baseResponseDTO.setBizSeqNo(request.getBizSeqNo());
-            postHandle(httpServletRequest,httpServletResponse,baseResponseDTO);
+            postHandle(httpServletRequest,httpServletResponse,baseResponseDTO,method);
             return baseResponseDTO;
         } catch (TimeoutException e) {
             logger.error("{}|submit request timeout exception:{}",request.getBizSeqNo(),e.getMessage());
@@ -87,7 +87,7 @@ public class BaseController {
         //doSomething before handle request
     }
 
-    protected void postHandle(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,BaseResponseDTO response)  {
+    protected void postHandle(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,BaseResponseDTO response,Method method)  {
         //doSomething after handle request
     }
 

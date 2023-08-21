@@ -29,7 +29,7 @@ public class AbstractBaseController extends BaseController{
     }
 
     @Override
-    protected void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BaseResponseDTO response) {
-        super.postHandle(httpServletRequest, httpServletResponse, response);
+    protected void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, BaseResponseDTO response,Method method) {
+        super.postHandle(httpServletRequest, httpServletResponse, response,method);
     }
 }

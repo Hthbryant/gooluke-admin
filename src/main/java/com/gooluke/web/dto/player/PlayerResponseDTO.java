@@ -1,9 +1,7 @@
 package com.gooluke.web.dto.player;
 
 import com.gooluke.biz.entity.TPlayer;
-import com.gooluke.common.enums.ErrorStatus;
 import com.gooluke.web.dto.BaseResponseDTO;
-import com.gooluke.web.dto.PageInfo;
 import lombok.Data;
 
 import java.util.List;
@@ -19,12 +17,7 @@ import java.util.List;
 public class PlayerResponseDTO extends BaseResponseDTO {
 
     private List<TPlayer> playerList;
-    private PageInfo page;
 
     public PlayerResponseDTO() {
-        super();
-    }
-    public PlayerResponseDTO(ErrorStatus errorStatus) {
-        super(errorStatus);
     }
 }

@@ -22,7 +22,14 @@
     </select>
 
     <select id="selectUserList" parameterType="com.gooluke.biz.entity.TUserInfo" resultMap="BaseResultMap">
-        select * from t_user_info order by id
+        select * from t_user_info
+        <where>
+            <if test="userId != null and userId !=''">and user_id like concat('%',#{userId},'%')</if>
+            <if test="userName != null and userName !=''">and user_name like concat('%',#{userName},'%')</if>
+            <if test="nickName != null and nickName !=''">and nick_name like concat('%',#{nickName},'%')</if>
+            <if test="address != null and address !=''">and address like concat('%',#{address},'%')</if>
+        </where>
+        order by id
         <if test="page != null">
             limit ${(page.currentPage -1) * page.pageSize}, ${page.pageSize}
         </if>

@@ -1,10 +1,8 @@
 package com.gooluke.web.controller;
 
 import com.gooluke.biz.service.LoginService;
-import com.gooluke.common.enums.ErrorStatus;
 import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.web.dto.login.LoginRequestDTO;
-import com.gooluke.web.dto.login.LoginResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -29,19 +27,17 @@ public class LoginController extends GoolukeBaseController{
     private LoginService loginService;
 
     @RequestMapping("/login")
-    public LoginResponseDTO login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
+    public BaseResponseDTO login(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                   @RequestHeader String userId, @RequestHeader String password){
         LoginRequestDTO requestDTO = new LoginRequestDTO();
         requestDTO.setUserId(userId);
         requestDTO.setPassword(password);
         log.info("login requestDTO:{}", JSON_MAPPER.toJson(requestDTO));
-        LoginResponseDTO timeoutResponse = new LoginResponseDTO(ErrorStatus.TIMEOUT_EXCEPTION);
-        LoginResponseDTO errorResponse = new LoginResponseDTO(ErrorStatus.SYSTEM_ERROR);
         return doExecute(httpServletRequest,httpServletResponse,timeout,requestDTO,(request->{
-            LoginResponseDTO responseDTO = loginService.login(request);
+            BaseResponseDTO responseDTO = loginService.login(request);
             log.info("login responseDTO:{}", JSON_MAPPER.toJson(responseDTO));
             return responseDTO;
-        }),timeoutResponse,errorResponse);
+        }),timeoutResponse,exceptionResponse);
     }
 
     @RequestMapping("/logout")
@@ -49,14 +45,9 @@ public class LoginController extends GoolukeBaseController{
                                   @RequestHeader String userId) {
         LoginRequestDTO requestDTO = new LoginRequestDTO();
         requestDTO.setUserId(userId);
-        log.info("logout requestDTO:{}", JSON_MAPPER.toJson(requestDTO));
-        LoginResponseDTO timeoutResponse = new LoginResponseDTO(ErrorStatus.TIMEOUT_EXCEPTION);
-        LoginResponseDTO errorResponse = new LoginResponseDTO(ErrorStatus.SYSTEM_ERROR);
         return doExecute(httpServletRequest, httpServletResponse, timeout, requestDTO, (request -> {
-            BaseResponseDTO responseDTO = loginService.logout(request);
-            log.info("logout responseDTO:{}", JSON_MAPPER.toJson(responseDTO));
-            return responseDTO;
-        }), timeoutResponse, errorResponse);
+            return loginService.logout(request);
+        }), timeoutResponse, exceptionResponse);
     }
 
 }

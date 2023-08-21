@@ -1,9 +1,8 @@
 package com.gooluke.web.controller;
 
 import com.gooluke.biz.service.PlayerService;
-import com.gooluke.common.enums.ErrorStatus;
+import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.web.dto.player.PlayerRequestDTO;
-import com.gooluke.web.dto.player.PlayerResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,18 +29,12 @@ public class PlayerController extends GoolukeBaseController {
 
     //@RequestCheck
     @RequestMapping("/list")
-    public PlayerResponseDTO getPlayerList(HttpServletRequest httpServletRequest,
-                                           HttpServletResponse httpServletResponse,
-                                           @RequestBody PlayerRequestDTO requestDTO) {
-
-        log.info("getPlayerList requestDTO:{}", JSON_MAPPER.toJson(requestDTO));
-        PlayerResponseDTO timeoutResponse = new PlayerResponseDTO(ErrorStatus.TIMEOUT_EXCEPTION);
-        PlayerResponseDTO errorResponse = new PlayerResponseDTO(ErrorStatus.SYSTEM_ERROR);
+    public BaseResponseDTO getPlayerList(HttpServletRequest httpServletRequest,
+                                         HttpServletResponse httpServletResponse,
+                                         @RequestBody PlayerRequestDTO requestDTO) {
 
         return doExecute(httpServletRequest, httpServletResponse, timeout, requestDTO, (request -> {
-            PlayerResponseDTO responseDTO = playerService.getPlayerList(request);
-            log.info("getPlayerList responseDTO:{}", JSON_MAPPER.toJson(responseDTO));
-            return responseDTO;
-        }), timeoutResponse, errorResponse);
+            return playerService.getPlayerList(request);
+        }), timeoutResponse, exceptionResponse);
     }
 }

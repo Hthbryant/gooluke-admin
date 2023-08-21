@@ -2,7 +2,6 @@ package com.gooluke.biz.service;
 
 import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.web.dto.login.LoginRequestDTO;
-import com.gooluke.web.dto.login.LoginResponseDTO;
 
 /**
  * @author 咕噜科
@@ -13,7 +12,7 @@ import com.gooluke.web.dto.login.LoginResponseDTO;
  */
 public interface LoginService {
 
-    LoginResponseDTO login (LoginRequestDTO requestDTO);
+    BaseResponseDTO login (LoginRequestDTO requestDTO);
 
     BaseResponseDTO logout(LoginRequestDTO requestDTO);
 

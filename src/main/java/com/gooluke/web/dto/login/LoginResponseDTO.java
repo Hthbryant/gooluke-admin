@@ -1,6 +1,5 @@
 package com.gooluke.web.dto.login;
 
-import com.gooluke.common.enums.ErrorStatus;
 import com.gooluke.web.dto.BaseResponseDTO;
 import lombok.Data;
 
@@ -21,9 +20,5 @@ public class LoginResponseDTO extends BaseResponseDTO {
 
     public LoginResponseDTO() {
 
-    }
-
-    public LoginResponseDTO(ErrorStatus errorStatus) {
-        super(errorStatus);
     }
 }

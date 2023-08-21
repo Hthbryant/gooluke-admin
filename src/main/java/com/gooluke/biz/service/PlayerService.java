@@ -1,7 +1,7 @@
 package com.gooluke.biz.service;
 
+import com.gooluke.web.dto.BaseResponseDTO;
 import com.gooluke.web.dto.player.PlayerRequestDTO;
-import com.gooluke.web.dto.player.PlayerResponseDTO;
 
 /**
  * @author 咕噜科
@@ -12,5 +12,5 @@ import com.gooluke.web.dto.player.PlayerResponseDTO;
  */
 public interface PlayerService {
 
-    PlayerResponseDTO getPlayerList(PlayerRequestDTO requestDTO);
+    BaseResponseDTO getPlayerList(PlayerRequestDTO requestDTO);
 }

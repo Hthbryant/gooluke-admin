@@ -34,11 +34,11 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private UserTokenDAO userTokenDAO;
     @Override
-    public LoginResponseDTO login(LoginRequestDTO requestDTO) {
+    public BaseResponseDTO login(LoginRequestDTO requestDTO) {
         TUserInfo userInfo = userInfoDAO.selectByUserIdAndPassword(requestDTO.getUserId(), requestDTO.getPassword());
         if (userInfo == null) {
             log.info("用户不存在或密码错误:{}",requestDTO.getUserId());
-            return new LoginResponseDTO(ErrorStatus.LOGIN_WRONG);
+            return new BaseResponseDTO(ErrorStatus.LOGIN_WRONG);
         }
 
         //todo 生成登录token
@@ -51,13 +51,13 @@ public class LoginServiceImpl implements LoginService {
         int result = oldUserToken != null ? userTokenDAO.updateToken(newUserToken) : userTokenDAO.insert(newUserToken);
         if (result == 0) {
             log.warn("生成或更新token失败");
-            return new LoginResponseDTO(ErrorStatus.SYSTEM_ERROR);
+            return new BaseResponseDTO(ErrorStatus.SYSTEM_ERROR);
         }
         LoginResponseDTO responseDTO = new LoginResponseDTO();
         responseDTO.setUserId(requestDTO.getUserId());
         responseDTO.setToken(token);
         responseDTO.setExpireTime(expireTime);
-        return responseDTO;
+        return new BaseResponseDTO(responseDTO);
     }
 
     @Override
